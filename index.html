@@ -123,7 +123,7 @@
       import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
       import { getFirestore, collection, addDoc, query, orderBy, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-      // إعدادات فايربيس الخاصة بك
+      // إعدادات فايربيس الرسمية لمشروعك
       const firebaseConfig = {
         apiKey: "AIzaSyCkLBbpQXDFBBLoS16i_z-C9SdRvtVwVEQ",
         authDomain: "haraj-yemen-179d1.firebaseapp.com",
@@ -140,7 +140,7 @@
 
       let currentUser = null;
 
-      // متابعة حالة المستخدم (مسجل دخول أم لا)
+      // تتبع حالة دخول المستخدم
       onAuthStateChanged(auth, (user) => {
           if (user) {
               currentUser = user;
@@ -151,7 +151,7 @@
           }
       });
 
-      // التحكم بنوافذ العرض
+      // التحكم بالنوافذ المنبثقة
       const loginModal = document.getElementById('loginModal');
       const addAdModal = document.getElementById('addAdModal');
 
@@ -175,7 +175,7 @@
           }).catch((err) => alert("حدث خطأ في تسجيل الدخول"));
       });
 
-      // جلب وعرض الإعلانات من قاعدة البيانات فوراً
+      // جلب الإعلانات وعرضها في الصفحة فوراً عند حدوث أي تغيير
       const adsCollection = collection(db, "ads");
       const q = query(adsCollection, orderBy("createdAt", "desc"));
       
@@ -202,7 +202,7 @@
           });
       });
 
-      // إرسال الإعلان ورفع الصورة برمجياً إلى Cloudinary
+      // إرسال الإعلان مع رفع الصورة آلياً إلى سحابتك
       document.getElementById('adForm').addEventListener('submit', async (e) => {
           e.preventDefault();
           const submitBtn = document.getElementById('submitBtn');
@@ -218,13 +218,13 @@
               return;
           }
 
-          // تجهيز ملف الرفع لـ Cloudinary الخاص بك
+          // استخدام الـ preset الافتراضي الفوري والمجاني لتجنب مشاكل الحفظ والتجميد
           const formData = new FormData();
           formData.append('file', file);
-          formData.append('upload_preset', 'Haraj-yemen'); // اسم الإعداد الخاص بك
+          formData.append('upload_preset', 'ml_default'); 
 
           try {
-              // عملية رفع الصورة في الخلفية بسلاسة
+              // رفع الصورة برمجياً إلى حسابك في Cloudinary
               const response = await fetch('https://api.cloudinary.com/v1_1/dyfi73jsq/image/upload', {
                   method: 'POST',
                   body: formData
@@ -233,9 +233,9 @@
               const data = await response.json();
               const imageUrl = data.secure_url;
 
-              if (!imageUrl) throw new Error("فشل جلب رابط الصورة");
+              if (!imageUrl) throw new Error("فشل الحصول على رابط الصورة");
 
-              // حفظ تفاصيل الإعلان في قاعدة بيانات Firestore
+              // حفظ تفاصيل السلعة كاملة في قاعدة بيانات فايربيس
               await addDoc(adsCollection, {
                   title: document.getElementById('adTitle').value,
                   price: document.getElementById('adPrice').value,
@@ -253,7 +253,7 @@
 
           } catch (error) {
               console.error(error);
-              alert("حدث خطأ أثناء النشر، تأكد من إعدادات الحفظ وحاول مجدداً.");
+              alert("حدث خطأ أثناء النشر، يرجى المحاولة مرة أخرى.");
           } finally {
               submitBtn.disabled = false;
               submitBtn.innerText = "نشر الإعلان الآن";
