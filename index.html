@@ -7,131 +7,40 @@
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-blue: #0056b3; /* لون الثقة والأمان */
-            --bg-color: #f4f6f9; /* خلفية رمادية فاتحة جداً مريحة للعين */
+            --primary-blue: #0056b3;
+            --bg-color: #f4f6f9;
             --card-bg: #ffffff;
             --text-dark: #212529;
             --text-muted: #6c757d;
-            --action-green: #28a745; /* لون زر الإضافة لتشجيع المستخدم */
+            --action-green: #28a745;
         }
-        body {
-            font-family: 'Tajawal', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-dark);
-            margin: 0;
-            padding: 0;
-        }
-        /* الشريط العلوي */
-        header {
-            background-color: var(--primary-blue);
-            color: white;
-            padding: 15px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
+        body { font-family: 'Tajawal', sans-serif; background-color: var(--bg-color); color: var(--text-dark); margin: 0; padding: 0; }
+        header { background-color: var(--primary-blue); color: white; padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
         .logo { font-size: 22px; font-weight: 700; }
         .header-buttons { display: flex; gap: 10px; }
-        .btn-add {
-            background-color: var(--action-green);
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 5px;
-            font-family: inherit;
-            font-weight: 700;
-            cursor: pointer;
-            font-size: 14px;
-        }
-        .btn-login {
-            background-color: transparent;
-            color: white;
-            border: 1px solid white;
-            padding: 8px 15px;
-            border-radius: 5px;
-            font-family: inherit;
-            cursor: pointer;
-            font-size: 14px;
-        }
-        /* شريط البحث */
-        .search-container {
-            background-color: var(--card-bg);
-            padding: 20px 5%;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            display: flex;
-            gap: 10px;
-        }
-        .search-container input {
-            flex: 1;
-            padding: 12px;
-            border: 1px solid #ced4da;
-            border-radius: 5px;
-            font-family: inherit;
-            font-size: 15px;
-            outline: none;
-        }
-        .search-container button {
-            background-color: var(--primary-blue);
-            color: white;
-            border: none;
-            padding: 0 20px;
-            border-radius: 5px;
-            font-family: inherit;
-            font-weight: 500;
-            cursor: pointer;
-        }
-        /* الأقسام السريعة */
-        .categories {
-            display: flex;
-            gap: 15px;
-            padding: 20px 5%;
-            overflow-x: auto;
-            white-space: nowrap;
-        }
-        .cat-item {
-            background: var(--card-bg);
-            padding: 10px 20px;
-            border-radius: 20px;
-            font-size: 14px;
-            color: var(--text-dark);
-            border: 1px solid #e9ecef;
-            cursor: pointer;
-        }
-        .cat-item.active {
-            background: var(--primary-blue);
-            color: white;
-            border-color: var(--primary-blue);
-        }
-        /* شبكة الإعلانات */
-        .ads-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-            gap: 15px;
-            padding: 0 5% 30px;
-        }
-        .ad-card {
-            background: var(--card-bg);
-            border-radius: 8px;
-            overflow: hidden;
-            border: 1px solid #e9ecef;
-        }
-        .ad-image {
-            height: 140px;
-            background-color: #e9ecef;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-muted);
-            font-size: 12px;
-        }
+        .btn-add { background-color: var(--action-green); color: white; border: none; padding: 8px 15px; border-radius: 5px; font-family: inherit; font-weight: 700; cursor: pointer; font-size: 14px; }
+        .btn-login { background-color: transparent; color: white; border: 1px solid white; padding: 8px 15px; border-radius: 5px; font-family: inherit; cursor: pointer; font-size: 14px; }
+        .search-container { background-color: var(--card-bg); padding: 20px 5%; box-shadow: 0 2px 5px rgba(0,0,0,0.05); display: flex; gap: 10px; }
+        .search-container input { flex: 1; padding: 12px; border: 1px solid #ced4da; border-radius: 5px; font-family: inherit; font-size: 15px; outline: none; }
+        .search-container button { background-color: var(--primary-blue); color: white; border: none; padding: 0 20px; border-radius: 5px; font-family: inherit; font-weight: 500; cursor: pointer; }
+        .categories { display: flex; gap: 15px; padding: 20px 5%; overflow-x: auto; white-space: nowrap; }
+        .cat-item { background: var(--card-bg); padding: 10px 20px; border-radius: 20px; font-size: 14px; border: 1px solid #e9ecef; cursor: pointer; }
+        .cat-item.active { background: var(--primary-blue); color: white; border-color: var(--primary-blue); }
+        .ads-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 15px; padding: 0 5% 30px; }
+        .ad-card { background: var(--card-bg); border-radius: 8px; border: 1px solid #e9ecef; overflow: hidden;}
+        .ad-image { height: 140px; background-color: #e9ecef; display: flex; align-items: center; justify-content: center; color: var(--text-muted); font-size: 12px; }
         .ad-details { padding: 12px; }
         .ad-title { font-size: 14px; font-weight: 700; margin: 0 0 8px; line-height: 1.4; }
         .ad-price { color: var(--action-green); font-weight: 700; font-size: 16px; margin-bottom: 8px; }
-        .ad-meta { display: flex; justify-content: space-between; font-size: 11px; color: var(--text-muted); }
+        
+        /* تصميم نافذة تسجيل الدخول الفخمة */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 1000; justify-content: center; align-items: center; }
+        .modal-content { background: white; padding: 30px; border-radius: 12px; width: 85%; max-width: 350px; text-align: center; position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        .close-modal { position: absolute; top: 15px; left: 15px; font-size: 20px; color: #aaa; cursor: pointer; font-weight: bold; }
+        .modal h2 { margin-top: 0; color: var(--primary-blue); }
+        .auth-btn { width: 100%; padding: 12px; margin-top: 15px; border: none; border-radius: 8px; font-family: inherit; font-size: 15px; font-weight: bold; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 10px; }
+        .btn-google { background-color: #4285F4; color: white; }
+        .btn-phone { background-color: var(--action-green); color: white; }
     </style>
 </head>
 <body>
@@ -139,10 +48,25 @@
     <header>
         <div class="logo">حراج اليمن</div>
         <div class="header-buttons">
-            <button class="btn-login">دخول</button>
+            <button class="btn-login" id="openLoginBtn">دخول</button>
             <button class="btn-add">+ أضف إعلانك</button>
         </div>
     </header>
+
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeLoginBtn">×</span>
+            <h2>تسجيل الدخول</h2>
+            <p style="color: #666; font-size: 14px; margin-bottom: 20px;">اختر طريقة الدخول للبدء بالبيع والشراء</p>
+            
+            <button id="googleLoginBtn" class="auth-btn btn-google">
+                🌐 الدخول بحساب جوجل
+            </button>
+            <button id="phoneLoginBtn" class="auth-btn btn-phone">
+                📱 الدخول برقم الجوال
+            </button>
+        </div>
+    </div>
 
     <div class="search-container">
         <input type="text" placeholder="ابحث عن سيارات، جوالات، أثاث...">
@@ -153,57 +77,55 @@
         <span class="cat-item active">الكل</span>
         <span class="cat-item">سيارات</span>
         <span class="cat-item">عقارات</span>
-        <span class="cat-item">أجهزة وإلكترونيات</span>
-        <span class="cat-item">أثاث</span>
-        <span class="cat-item">أدوات ومعدات</span>
+        <span class="cat-item">إلكترونيات</span>
     </div>
 
     <div class="ads-grid">
-        <div class="ad-card">
-            <div class="ad-image">صورة السلعة</div>
-            <div class="ad-details">
-                <h3 class="ad-title">تويوتا كورولا 2015 نظيفة جداً</h3>
-                <div class="ad-price">25,000 ر.س</div>
-                <div class="ad-meta">
-                    <span>صنعاء</span>
-                    <span>قبل دقيقة</span>
-                </div>
-            </div>
-        </div>
-        <div class="ad-card">
-            <div class="ad-image">صورة السلعة</div>
-            <div class="ad-details">
-                <h3 class="ad-title">جوال ايفون 13 برو ماكس مستخدم</h3>
-                <div class="ad-price">3,200 ر.س</div>
-                <div class="ad-meta">
-                    <span>الحديدة</span>
-                    <span>قبل 5 دقائق</span>
-                </div>
-            </div>
-        </div>
-        <div class="ad-card">
-            <div class="ad-image">صورة السلعة</div>
-            <div class="ad-details">
-                <h3 class="ad-title">طقم كنب جلوس تركي شبه جديد</h3>
-                <div class="ad-price">850 ر.س</div>
-                <div class="ad-meta">
-                    <span>صنعاء</span>
-                    <span>قبل ساعة</span>
-                </div>
-            </div>
-        </div>
-        <div class="ad-card">
-            <div class="ad-image">صورة السلعة</div>
-            <div class="ad-details">
-                <h3 class="ad-title">دريل (شنيور) بوش للبيع</h3>
-                <div class="ad-price">150 ر.س</div>
-                <div class="ad-meta">
-                    <span>الحديدة</span>
-                    <span>اليوم</span>
-                </div>
-            </div>
-        </div>
+        <div class="ad-card"><div class="ad-image">صورة السلعة</div><div class="ad-details"><h3 class="ad-title">تويوتا كورولا 2015 نظيفة جداً</h3><div class="ad-price">25,000 ريال يمني</div></div></div>
+        <div class="ad-card"><div class="ad-image">صورة السلعة</div><div class="ad-details"><h3 class="ad-title">جوال ايفون 13 برو ماكس مستخدم</h3><div class="ad-price">3,200 ريال يمني</div></div></div>
     </div>
 
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+      import { getAuth, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+      // الكود السري الخاص بمشروعك
+      const firebaseConfig = {
+        apiKey: "AIzaSyCkLBbpQXDFBBLoS16i_z-C9SdRvtVwVEQ",
+        authDomain: "haraj-yemen-179d1.firebaseapp.com",
+        projectId: "haraj-yemen-179d1",
+        storageBucket: "haraj-yemen-179d1.firebasestorage.app",
+        messagingSenderId: "280747308912",
+        appId: "1:280747308912:web:23dd992bbaee23d99481b5"
+      };
+
+      // تشغيل النظام
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth(app);
+      const provider = new GoogleAuthProvider();
+
+      // أوامر فتح وإغلاق النافذة
+      const modal = document.getElementById('loginModal');
+      document.getElementById('openLoginBtn').addEventListener('click', () => modal.style.display = 'flex');
+      document.getElementById('closeLoginBtn').addEventListener('click', () => modal.style.display = 'none');
+
+      // أمر تسجيل الدخول بجوجل
+      document.getElementById('googleLoginBtn').addEventListener('click', () => {
+          signInWithPopup(auth, provider).then((result) => {
+              const user = result.user;
+              alert("تم تسجيل الدخول بنجاح! أهلاً بك يا " + user.displayName);
+              modal.style.display = 'none';
+              document.getElementById('openLoginBtn').innerText = "حسابي";
+          }).catch((error) => {
+              alert("حدث خطأ أثناء الدخول، حاول مرة أخرى.");
+              console.error(error);
+          });
+      });
+
+      // تنبيه مؤقت لزر الجوال
+      document.getElementById('phoneLoginBtn').addEventListener('click', () => {
+          alert("سيتم تفعيل شاشة إدخال رقم الجوال في الخطوة القادمة!");
+      });
+    </script>
 </body>
 </html>
