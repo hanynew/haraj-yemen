@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حراج اليمن | بيع واشتر أي شيء</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #0056b3; /* لون الثقة والأمان */
+            --bg-color: #f4f6f9; /* خلفية رمادية فاتحة جداً مريحة للعين */
+            --card-bg: #ffffff;
+            --text-dark: #212529;
+            --text-muted: #6c757d;
+            --action-green: #28a745; /* لون زر الإضافة لتشجيع المستخدم */
+        }
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            margin: 0;
+            padding: 0;
+        }
+        /* الشريط العلوي */
+        header {
+            background-color: var(--primary-blue);
+            color: white;
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .logo { font-size: 22px; font-weight: 700; }
+        .header-buttons { display: flex; gap: 10px; }
+        .btn-add {
+            background-color: var(--action-green);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-family: inherit;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .btn-login {
+            background-color: transparent;
+            color: white;
+            border: 1px solid white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-family: inherit;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        /* شريط البحث */
+        .search-container {
+            background-color: var(--card-bg);
+            padding: 20px 5%;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            display: flex;
+            gap: 10px;
+        }
+        .search-container input {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            font-family: inherit;
+            font-size: 15px;
+            outline: none;
+        }
+        .search-container button {
+            background-color: var(--primary-blue);
+            color: white;
+            border: none;
+            padding: 0 20px;
+            border-radius: 5px;
+            font-family: inherit;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        /* الأقسام السريعة */
+        .categories {
+            display: flex;
+            gap: 15px;
+            padding: 20px 5%;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+        .cat-item {
+            background: var(--card-bg);
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            color: var(--text-dark);
+            border: 1px solid #e9ecef;
+            cursor: pointer;
+        }
+        .cat-item.active {
+            background: var(--primary-blue);
+            color: white;
+            border-color: var(--primary-blue);
+        }
+        /* شبكة الإعلانات */
+        .ads-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 15px;
+            padding: 0 5% 30px;
+        }
+        .ad-card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #e9ecef;
+        }
+        .ad-image {
+            height: 140px;
+            background-color: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 12px;
+        }
+        .ad-details { padding: 12px; }
+        .ad-title { font-size: 14px; font-weight: 700; margin: 0 0 8px; line-height: 1.4; }
+        .ad-price { color: var(--action-green); font-weight: 700; font-size: 16px; margin-bottom: 8px; }
+        .ad-meta { display: flex; justify-content: space-between; font-size: 11px; color: var(--text-muted); }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">حراج اليمن</div>
+        <div class="header-buttons">
+            <button class="btn-login">دخول</button>
+            <button class="btn-add">+ أضف إعلانك</button>
+        </div>
+    </header>
+
+    <div class="search-container">
+        <input type="text" placeholder="ابحث عن سيارات، جوالات، أثاث...">
+        <button>بحث</button>
+    </div>
+
+    <div class="categories">
+        <span class="cat-item active">الكل</span>
+        <span class="cat-item">سيارات</span>
+        <span class="cat-item">عقارات</span>
+        <span class="cat-item">أجهزة وإلكترونيات</span>
+        <span class="cat-item">أثاث</span>
+        <span class="cat-item">أدوات ومعدات</span>
+    </div>
+
+    <div class="ads-grid">
+        <div class="ad-card">
+            <div class="ad-image">صورة السلعة</div>
+            <div class="ad-details">
+                <h3 class="ad-title">تويوتا كورولا 2015 نظيفة جداً</h3>
+                <div class="ad-price">25,000 ر.س</div>
+                <div class="ad-meta">
+                    <span>صنعاء</span>
+                    <span>قبل دقيقة</span>
+                </div>
+            </div>
+        </div>
+        <div class="ad-card">
+            <div class="ad-image">صورة السلعة</div>
+            <div class="ad-details">
+                <h3 class="ad-title">جوال ايفون 13 برو ماكس مستخدم</h3>
+                <div class="ad-price">3,200 ر.س</div>
+                <div class="ad-meta">
+                    <span>الحديدة</span>
+                    <span>قبل 5 دقائق</span>
+                </div>
+            </div>
+        </div>
+        <div class="ad-card">
+            <div class="ad-image">صورة السلعة</div>
+            <div class="ad-details">
+                <h3 class="ad-title">طقم كنب جلوس تركي شبه جديد</h3>
+                <div class="ad-price">850 ر.س</div>
+                <div class="ad-meta">
+                    <span>صنعاء</span>
+                    <span>قبل ساعة</span>
+                </div>
+            </div>
+        </div>
+        <div class="ad-card">
+            <div class="ad-image">صورة السلعة</div>
+            <div class="ad-details">
+                <h3 class="ad-title">دريل (شنيور) بوش للبيع</h3>
+                <div class="ad-price">150 ر.س</div>
+                <div class="ad-meta">
+                    <span>الحديدة</span>
+                    <span>اليوم</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
