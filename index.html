@@ -140,7 +140,6 @@
 
       let currentUser = null;
 
-      // تتبع حالة دخول المستخدم
       onAuthStateChanged(auth, (user) => {
           if (user) {
               currentUser = user;
@@ -151,7 +150,6 @@
           }
       });
 
-      // التحكم بالنوافذ المنبثقة
       const loginModal = document.getElementById('loginModal');
       const addAdModal = document.getElementById('addAdModal');
 
@@ -168,14 +166,12 @@
       });
       document.getElementById('closeAddAdBtn').addEventListener('click', () => addAdModal.style.display = 'none');
 
-      // تسجيل الدخول بجوجل
       document.getElementById('googleLoginBtn').addEventListener('click', () => {
           signInWithPopup(auth, provider).then(() => {
               loginModal.style.display = 'none';
           }).catch((err) => alert("حدث خطأ في تسجيل الدخول"));
       });
 
-      // جلب الإعلانات وعرضها في الصفحة فوراً عند حدوث أي تغيير
       const adsCollection = collection(db, "ads");
       const q = query(adsCollection, orderBy("createdAt", "desc"));
       
@@ -202,12 +198,21 @@
           });
       });
 
-      // إرسال الإعلان مع رفع الصورة آلياً عبر خادم فوري ومفتوح
+      // دالة لتحويل الصورة إلى نص لقاعدة البيانات لمنع مشاكل الحظر نهائياً
+      const convertBase64 = (file) => {
+          return new Promise((resolve, reject) => {
+              const fileReader = new FileReader();
+              fileReader.readAsDataURL(file);
+              fileReader.onload = () => { resolve(fileReader.result); };
+              fileReader.onerror = (error) => { reject(error); };
+          });
+      };
+
       document.getElementById('adForm').addEventListener('submit', async (e) => {
           e.preventDefault();
           const submitBtn = document.getElementById('submitBtn');
           submitBtn.disabled = true;
-          submitBtn.innerText = "جاري رفع الصورة والنشر...";
+          submitBtn.innerText = "جاري النشر الفوري...";
 
           const fileInput = document.getElementById('adImageFile');
           const file = fileInput.files[0];
@@ -218,40 +223,29 @@
               return;
           }
 
-          const formData = new FormData();
-          formData.append('image', file);
-
           try {
-              // رفع الصورة عبر خادم الرفع المفتوح والسريع والمستقر Freeimage
-              const response = await fetch('https://api.imgbb.com/1/upload?key=6435cc98888b1b0b7da9df9ccca0f8ec', {
-                  method: 'POST',
-                  body: formData
-              });
-              
-              const result = await response.json();
-              const imageUrl = result.data.url;
+              // تحويل الصورة فوراً بدون وسيط خارجي
+              const base64Image = await convertBase64(file);
 
-              if (!imageUrl) throw new Error("فشل الحصول على رابط الصورة");
-
-              // حفظ تفاصيل السلعة كاملة في قاعدة بيانات فايربيس الرسمية التابعة لك
+              // إرسال البيانات الموحدة إلى خادم فايربيس المفتوح والآمن الخاص بك
               await addDoc(adsCollection, {
                   title: document.getElementById('adTitle').value,
                   price: document.getElementById('adPrice').value,
                   category: document.getElementById('adCategory').value,
                   desc: document.getElementById('adDesc').value,
-                  imageUrl: imageUrl,
+                  imageUrl: base64Image, // حفظ النص المشفر للصورة
                   userId: currentUser.uid,
                   userName: currentUser.displayName,
                   createdAt: new Date()
               });
 
-              alert("تهانينا! تم نشر إعلانك بنجاح على حراج اليمن 🎉");
+              alert("تهانينا! تم نشر إعلانك بنجاح وبأمان على حراج اليمن 🎉");
               document.getElementById('adForm').reset();
               addAdModal.style.display = 'none';
 
           } catch (error) {
               console.error(error);
-              alert("حدث خطأ أثناء النشر، يرجى المحاولة مرة أخرى.");
+              alert("حدث خطأ أثناء حفظ الإعلان، يرجى المحاولة مرة أخرى.");
           } finally {
               submitBtn.disabled = false;
               submitBtn.innerText = "نشر الإعلان الآن";
